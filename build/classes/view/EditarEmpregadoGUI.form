@@ -90,7 +90,7 @@
                               <Group type="102" attributes="0">
                                   <Component id="buttonApresentar" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="32767" attributes="0"/>
-                                  <Component id="buttonCadastrar" min="-2" max="-2" attributes="0"/>
+                                  <Component id="buttonSalvar" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="42" pref="42" max="-2" attributes="0"/>
@@ -132,7 +132,7 @@
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="buttonApresentar" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="buttonCadastrar" alignment="3" min="-2" max="-2" attributes="0"/>
+                              <Component id="buttonSalvar" alignment="3" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
@@ -194,12 +194,12 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonApresentarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="buttonCadastrar">
+        <Component class="javax.swing.JButton" name="buttonSalvar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Salvar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonCadastrarActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="buttonSalvarActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="textSalario">

@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Administrador
+ * @author Giovane de Oliveira
  */
 public class EditarEmpregadoGUI extends javax.swing.JFrame {
 
@@ -23,14 +23,20 @@ public class EditarEmpregadoGUI extends javax.swing.JFrame {
     /**
      * Creates new form EditarEmpregadoGUI
      */
-    public EditarEmpregadoGUI(int id) {
+    public EditarEmpregadoGUI(int codigo) {
         initComponents();
-        textSalario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.##"))));
-        e = gerEmp.selecionarEmpregado(id);
+        
+        //aplicar máscara no campo salário bruto
+        textSalario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+                new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.##"))));
+        
+        //seleciona o empregado com o código igual ao passado
+        e = gerEmp.selecionarEmpregado(codigo);
+        
+        //preenche os campos com os dados do empregado.
         textCodigoEmpregado.setText(Integer.toString(e.getCodigoEmpregado()));
         textNomeEmpregado.setText(e.getNomeEmpregado());
         textSetor.setText(e.getSetor());
-        System.out.println(e.getSalarioBruto());
         textSalario.setText(Double.toString(e.getSalarioBruto()).replace(".", ","));
         labelValorCalculado.setText("R$ " + e.getRecInss());
         
@@ -59,7 +65,7 @@ public class EditarEmpregadoGUI extends javax.swing.JFrame {
         buttonCalcular = new javax.swing.JButton();
         labelValorCalculado = new javax.swing.JLabel();
         buttonApresentar = new javax.swing.JButton();
-        buttonCadastrar = new javax.swing.JButton();
+        buttonSalvar = new javax.swing.JButton();
         textSalario = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -93,10 +99,10 @@ public class EditarEmpregadoGUI extends javax.swing.JFrame {
             }
         });
 
-        buttonCadastrar.setText("Salvar");
-        buttonCadastrar.addActionListener(new java.awt.event.ActionListener() {
+        buttonSalvar.setText("Salvar");
+        buttonSalvar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buttonCadastrarActionPerformed(evt);
+                buttonSalvarActionPerformed(evt);
             }
         });
 
@@ -131,7 +137,7 @@ public class EditarEmpregadoGUI extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(buttonApresentar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(buttonCadastrar)))
+                                .addComponent(buttonSalvar)))
                         .addGap(42, 42, 42))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -165,7 +171,7 @@ public class EditarEmpregadoGUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(buttonApresentar)
-                            .addComponent(buttonCadastrar))))
+                            .addComponent(buttonSalvar))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -191,14 +197,16 @@ public class EditarEmpregadoGUI extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     @SuppressWarnings("empty-statement")
-    private void buttonCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCadastrarActionPerformed
+    private void buttonSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonSalvarActionPerformed
         try {
             //Envia pedido para cadastro de Uusuário
 
             e.setCodigoEmpregado(Integer.parseInt(textCodigoEmpregado.getText()));
             e.setNomeEmpregado(textNomeEmpregado.getText());
+            
             String temp = textSalario.getText().replace(".", "");
             temp = temp.replace(",", ".");
+            
             e.setSalarioBruto(Double.parseDouble(temp));
             e.setSetor(textSetor.getText());
             e.setRecInss((Double.parseDouble(temp)));
@@ -214,25 +222,27 @@ public class EditarEmpregadoGUI extends javax.swing.JFrame {
             dispose();
 
         } catch (Exception e) {
-            JOptionPane optionPane = new JOptionPane("Erro! Confira os dados e tente novamente!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane optionPane = new JOptionPane("Erro! Confira os dados e tente novamente!", 
+                    JOptionPane.ERROR_MESSAGE);
             JDialog dialog = optionPane.createDialog("Erro");
             dialog.setAlwaysOnTop(true);
             dialog.setVisible(true);
         }
 
-    }//GEN-LAST:event_buttonCadastrarActionPerformed
+    }//GEN-LAST:event_buttonSalvarActionPerformed
 
     private void buttonApresentarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonApresentarActionPerformed
-        // TODO add your handling code here:
-        GerenciarEmpregadosGUI gerEmp = new GerenciarEmpregadosGUI();
-        gerEmp.setVisible(true);
+        GerenciarEmpregadosGUI empGUI = new GerenciarEmpregadosGUI();
+        empGUI.setVisible(true);
         dispose();
+
     }//GEN-LAST:event_buttonApresentarActionPerformed
 
     private void buttonCalcularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buttonCalcularActionPerformed
 
         try {
-            //e = new Empregado();
+            
+            //cria empregado temporário
             Empregado empTemp = new Empregado();
 
             empTemp.setCodigoEmpregado(Integer.parseInt(textCodigoEmpregado.getText()));
@@ -247,7 +257,8 @@ public class EditarEmpregadoGUI extends javax.swing.JFrame {
             empTemp.setRecInss(pin.calcularInss(Double.parseDouble(temp)));
 
         } catch (Exception e) {
-            JOptionPane optionPane = new JOptionPane("Erro! Confira os dados e tente novamente!", JOptionPane.ERROR_MESSAGE);
+            JOptionPane optionPane = new JOptionPane("Erro! Confira os dados e tente novamente!", 
+                    JOptionPane.ERROR_MESSAGE);
             JDialog dialog = optionPane.createDialog("Erro");
             dialog.setAlwaysOnTop(true);
             dialog.setVisible(true);
@@ -286,8 +297,8 @@ public class EditarEmpregadoGUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton buttonApresentar;
-    private javax.swing.JButton buttonCadastrar;
     private javax.swing.JButton buttonCalcular;
+    private javax.swing.JButton buttonSalvar;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labelCodigoEmpregado;
     private javax.swing.JLabel labelNomeEmpregado;

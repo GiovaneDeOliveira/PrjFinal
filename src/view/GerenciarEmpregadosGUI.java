@@ -195,7 +195,7 @@ public class GerenciarEmpregadosGUI extends javax.swing.JFrame {
         //Mensagem de erro é exibida caso nenhuma linha tenha sido selecionada                
         } catch (Exception e) {
             JOptionPane optionPane = new JOptionPane("Selecione um registro para excluir!", 
-                    JOptionPane.ERROR_MESSAGE);    
+            JOptionPane.ERROR_MESSAGE);    
             JDialog dialog = optionPane.createDialog("Erro");
             dialog.setAlwaysOnTop(true);
             dialog.setVisible(true);

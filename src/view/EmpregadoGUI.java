@@ -22,7 +22,8 @@ public class EmpregadoGUI extends javax.swing.JFrame {
         initComponents();
         
         //Máscara para o campo salário bruto
-        textSalario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.##"))));
+        textSalario.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(
+                new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#,###.##"))));
         
         ge = new GerenciarEmpregado();
     }
@@ -205,7 +206,8 @@ public class EmpregadoGUI extends javax.swing.JFrame {
             
         //Verificação geral de erros/exceções, com mensagem de retorno ao usuário               
         } catch (Exception e) {
-            JOptionPane optionPane = new JOptionPane("Erro! Confira os dados e tente novamente!", JOptionPane.ERROR_MESSAGE);    
+            JOptionPane optionPane = new JOptionPane("Erro! Confira os dados e tente novamente!", 
+                    JOptionPane.ERROR_MESSAGE);    
             JDialog dialog = optionPane.createDialog("Erro");
             dialog.setAlwaysOnTop(true);
             dialog.setVisible(true);    
@@ -231,7 +233,8 @@ public class EmpregadoGUI extends javax.swing.JFrame {
                 e = new Empregado();
             }
             else {
-                JOptionPane optionPane = new JOptionPane("Erro! Confira os dados e tente novamente!", JOptionPane.ERROR_MESSAGE);    
+                JOptionPane optionPane = new JOptionPane("Erro! Confira os dados e tente novamente!", 
+                        JOptionPane.ERROR_MESSAGE);    
                 JDialog dialog = optionPane.createDialog("Erro");
                 dialog.setAlwaysOnTop(true);
                 dialog.setVisible(true);
@@ -241,7 +244,8 @@ public class EmpregadoGUI extends javax.swing.JFrame {
         
         //Verificação geral de erros/exceções, com mensagem de retorno ao usuário               
         } catch (Exception e) {
-            JOptionPane optionPane = new JOptionPane("Erro! Confira os dados e tente novamente!", JOptionPane.ERROR_MESSAGE);    
+            JOptionPane optionPane = new JOptionPane("Erro! Confira os dados e tente novamente!", 
+                    JOptionPane.ERROR_MESSAGE);    
             JDialog dialog = optionPane.createDialog("Erro");
             dialog.setAlwaysOnTop(true);
             dialog.setVisible(true);
